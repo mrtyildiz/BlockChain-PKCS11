@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  sign-pkcs11-app:
+    image: go-pkcs11-latest:1.0
+    container_name: sign-pkcs11-app
+    volumes:
+      - ./sign-pkcs11:/sign-pkcs11
+      - ./config/:/opt/procrypt/km3000/config/
+      - ./HSM_lib/libprocryptoki.so:/lib/libprocryptoki.so
+      - ./HSM_lib/libprocryptoki.so:/lib64/libprocryptoki.so
+    environment:
+      - PKCS11_LIB=/lib64/libprocryptoki.so
+    ports:
+      - "8080:8080"
+    networks:
+      custom_network:
+        ipv4_address: 172.88.66.2
+    restart: unless-stopped
+    command: ["sleep", "infinity"]
+
+  sign-pkcs11-hsm:
+    image: hsm
+    container_name: hsm
+    ports:
+      - "5000:5000"
+    networks:
+      custom_network:
+        ipv4_address: 172.88.66.3
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.88.66.0/24
