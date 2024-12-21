@@ -143,11 +143,5 @@ The application will be available at `http://localhost:8080`.
 - Enhance blockchain functionalities with real-world use cases.
 - Add comprehensive error handling and logging.
 
-## License
 
-This project is licensed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-For any inquiries or issues, please contact [muratasnb@hotmail.com].
 
